@@ -1,0 +1,1 @@
+Statistiks tracks visits to sites hosted with Node.js.  It does so by sending a socket message to a port on the server.  This means that it will only work in browsers that support websockets, but I'm okay with that.  Push the web to upgrade!
