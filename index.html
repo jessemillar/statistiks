@@ -1,0 +1,125 @@
+<html>
+	<head>
+		<title>Statistiks</title>
+		<style>
+			html, body
+			{
+				padding: 0px;
+				margin: 0px;
+
+				background-color: #ffffff;
+			}
+
+			#graph
+			{
+				position: absolute;
+				left: 0px;
+				bottom: 0px;
+				width: auto;
+				height: 100%;
+
+				z-index: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div id = "graph"></div>
+	</body>
+</html>
+<script>
+	var socket = new WebSocket('ws://www.jessemillar.com:1234') // The global variable we'll use to keep track of the server
+
+	socket.onopen = function()
+	{
+		socket.send('data_request')
+	}
+
+	socket.onmessage = function(message)
+	{
+		database = JSON.parse(message.data)
+		console.log('Data received', JSON.parse(message.data))
+		graph()
+	}
+
+	var barWidth = 75
+	var maxBarHeight = window.innerHeight - 10
+
+	var colorBarTallest = '#FF1D23'
+	var colorBarTaller = '#D40D12'
+	var colorBarShorter = '#94090D'
+	var colorBarShortest = '#5C0002'
+	var colorBarMiniscule = '#450003'
+
+	var database = new Array()
+
+	function graph()
+	{
+		var largestVisitorCount = 0 // Check for the greatest value
+		for (var i = 0; i < database.length; i++)
+		{
+			if (database[i].visitors > largestVisitorCount)
+			{
+				largestVisitorCount = database[i].visitors
+			}
+		}
+
+		var high = maxBarHeight * 0.8
+		var medium = maxBarHeight * 0.6
+		var low = maxBarHeight * 0.4
+		var miniscule = maxBarHeight * 0.2
+
+		if (database.length > 0)
+		{
+			for (var i = 0; i < database.length; i++)
+			{
+				var bar = document.createElement('div')
+					bar.style.position = 'absolute'
+					bar.style.left = String(i * barWidth + 'px')
+					bar.style.bottom = '0px'
+					bar.style.width = String(barWidth + 'px')
+					if (largestVisitorCount > maxBarHeight)
+					{
+						bar.style.height = String((maxBarHeight / largestVisitorCount) * database[i].visitors + 'px')
+					}
+					else
+					{
+						bar.style.height = String(database[i].visitors + 'px')
+					}
+					if (database[i].visitors > 1)
+					{
+						bar.title = database[i].visitors + ' visitors on ' + database[i].date
+					}
+					else
+					{
+						bar.title = database[i].visitors + ' visitor on ' + database[i].date
+					}
+					if (database[i].visitors > high)
+					{
+						bar.style.background = colorBarTallest
+					}
+					else if (database[i].visitors > medium)
+					{
+						bar.style.background = colorBarTaller
+					}
+					else if (database[i].visitors > low)
+					{
+						bar.style.background = colorBarShorter
+					}
+					else if (database[i].visitors > miniscule)
+					{
+						bar.style.background = colorBarShortest
+					}
+					else
+					{
+						bar.style.background = colorBarMiniscule
+					}
+
+				document.getElementById('graph').appendChild(bar)
+			}
+		}
+		else
+		{
+			console.log('No visitor data to show')
+		}
+	}
+</script>
