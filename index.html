@@ -72,9 +72,28 @@
 		{
 			for (var i = 0; i < database.length; i++)
 			{
+				var container = document.createElement('div')
+					container.id = String('container' + i)
+					container.style.position = 'absolute'
+					container.style.left = String(i * barWidth + 'px')
+					container.style.bottom = '0px'
+					container.style.width = String(barWidth + 'px')
+					container.style.height = String(window.innerHeight + 'px')
+					if (database[i].visitors > 1)
+					{
+						container.title = database[i].visitors + ' visitors on ' + database[i].date
+					}
+					else
+					{
+						container.title = database[i].visitors + ' visitor on ' + database[i].date
+					}
+
+				document.getElementById('graph').appendChild(container)
+
 				var bar = document.createElement('div')
+					bar.id = String('bar' + i)
 					bar.style.position = 'absolute'
-					bar.style.left = String(i * barWidth + 'px')
+					bar.style.left = '0px'
 					bar.style.bottom = '0px'
 					bar.style.width = String(barWidth + 'px')
 					if (largestVisitorCount > maxBarHeight)
@@ -84,14 +103,6 @@
 					else
 					{
 						bar.style.height = String(database[i].visitors + 'px')
-					}
-					if (database[i].visitors > 1)
-					{
-						bar.title = database[i].visitors + ' visitors on ' + database[i].date
-					}
-					else
-					{
-						bar.title = database[i].visitors + ' visitor on ' + database[i].date
 					}
 					if (database[i].visitors > high)
 					{
@@ -114,7 +125,7 @@
 						bar.style.background = colorBarMiniscule
 					}
 
-				document.getElementById('graph').appendChild(bar)
+				document.getElementById(String('container' + i)).appendChild(bar)
 			}
 		}
 		else
