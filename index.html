@@ -41,7 +41,7 @@
 		graph()
 	}
 
-	var barWidth = 75
+	var barWidth = 65
 	var maxBarHeight = window.innerHeight - 10
 
 	var colorBarTallest = '#FF1D23'
@@ -73,12 +73,12 @@
 			for (var i = 0; i < database.length; i++)
 			{
 				var container = document.createElement('div')
-					container.id = String('container' + i)
+					container.id = 'container' + i
 					container.style.position = 'absolute'
-					container.style.left = String(i * barWidth + 'px')
+					container.style.left = i * barWidth + 'px'
 					container.style.bottom = '0px'
-					container.style.width = String(barWidth + 'px')
-					container.style.height = String(window.innerHeight + 'px')
+					container.style.width = barWidth + 'px'
+					container.style.height = window.innerHeight + 'px'
 					if (database[i].visitors > 1)
 					{
 						container.title = database[i].visitors + ' visitors on ' + database[i].date
@@ -91,19 +91,22 @@
 				document.getElementById('graph').appendChild(container)
 
 				var bar = document.createElement('div')
-					bar.id = String('bar' + i)
+					bar.id = 'bar' + i
 					bar.style.position = 'absolute'
 					bar.style.left = '0px'
-					bar.style.bottom = '0px'
-					bar.style.width = String(barWidth + 'px')
+					bar.style.top = '50%'
+					bar.style.width = barWidth + 'px'
 					if (largestVisitorCount > maxBarHeight)
 					{
-						bar.style.height = String((maxBarHeight / largestVisitorCount) * database[i].visitors + 'px')
+						bar.style.height = (maxBarHeight / largestVisitorCount) * database[i].visitors + 'px'
+						bar.style.marginTop = ((maxBarHeight / largestVisitorCount) * database[i].visitors) / 2 * -1 + 'px'
 					}
 					else
 					{
-						bar.style.height = String(database[i].visitors + 'px')
+						bar.style.height = database[i].visitors + 'px'
+						bar.style.marginTop = database[i].visitors / 2 * -1 + 'px'
 					}
+
 					if (database[i].visitors > high)
 					{
 						bar.style.background = colorBarTallest
