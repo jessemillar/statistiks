@@ -1,0 +1,98 @@
+html, body {
+	background-color: #ffffff;
+	font-size: 0px;
+}
+
+#container {
+	position: absolute;
+	left: 50%;
+	top: 65px;
+	width: 900px;
+	height: auto;
+
+	margin-left: -450px;
+}
+
+	#logo {
+		display: inline-block;
+
+		color: #ff3c99;
+		font-family: 'Source Sans Pro', sans-serif;
+		font-size: 50px;
+		font-weight: bold;
+		text-transform: uppercase;
+
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+
+		z-index: 0;
+	}
+
+	#authentication {
+		position: absolute;
+		right: 0px;
+		top: 22px;
+		
+		color: #ff3c99;
+		font-family: 'Source Sans Pro', sans-serif;
+		font-size: 18px;
+		font-weight: bold;
+		text-transform: uppercase;
+	}
+
+	#map {
+		display: inline-block;
+
+		width: 100%;
+		height: 550px;
+
+		margin-top: -17px;
+
+		background-color: #4fc1ff;
+
+		-webkit-border-radius: 4px;
+		-moz-border-radius: 4px;
+		border-radius: 4px;
+
+		z-index: 1;
+	}
+
+		#map_data {
+			postion: relative;
+			width: 100%;
+			height: 100%;
+		}
+
+	#content {
+		display: inline-block;
+
+		width: 100%;
+		height: auto;
+
+		padding-top: 30px;
+
+		color: #ff3c99;
+		font-family: 'Source Sans Pro', sans-serif;
+		font-size: 20px;
+	}
+
+	#footer {
+		display: inline-block;
+
+		width: 100%;
+		height: auto;
+
+		padding-top: 50px;
+		padding-bottom: 50px;
+
+		color: #ff3c99;
+		font-family: 'Source Sans Pro', sans-serif;
+		font-size: 18px;
+		font-weight: bold;
+		text-align: center;
+		text-transform: uppercase;
+	}

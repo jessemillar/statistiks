@@ -1,0 +1,10 @@
+Total page views/visitors
+
+People
+	Where from
+	How long was visit
+	When they got on (date/time)
+	Whether returning or new visitor
+
+Easy removal of people
+	Don't actually remove them from database, just don't display
